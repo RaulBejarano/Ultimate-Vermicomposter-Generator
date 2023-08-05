@@ -3,7 +3,7 @@
 
 ![version](https://badgen.net/badge/version/v1.0.0?icon=github)
 ![license](https://badgen.net/github/license/RaulBejarano/Ultimate-Vermicomposter-Generator)
-![commits](https://badgen.net/github/commits//RaulBejarano/Ultimate-Vermicomposter-Generator/main)
+![commits](https://badgen.net/github/commits/RaulBejarano/Ultimate-Vermicomposter-Generator/main)
 
 
 
@@ -34,46 +34,34 @@ Fist of all you have to download several things:
 
 Let's start by opening the file [`./examples/xl/xl_mid.scad`](./examples/xl/xl_mid.scad) with OpenSCAD.
 
-You will see some code but we only are interested in the parameters inside the toroidal definition. Let's change some of them:
+You will see some code but we only are interested in the parameters inside the vermicomposter definition. Let's change some of them:
   
 This defines a bin:
 > :warning: Use milimeters
 ```
-toroidal_propeller(
-    blades = 3,                     // number of blades | Default(3)
-    height = 6,                     // height | Default(6)
-    blade_length = 68,              // blade length | Default(68)
-    blade_width = 42,               // blade width | Default(42)
-    blade_thickness = 4,            // blade thickness | Default(4)
-    blade_hole_offset = 1.4,        // blade hole offset | Default(1.4)
-    blade_twist = 15,               // blade twist angle | Default(15)
-    blade_offset = -6,              // blade distance from propeller axis | Default(-6)
-    safe_blades_direction = "PREV", // indicates if a blade must delete itself from getting into the previous (PREV) or the next blade (NEXT) | Default("PREV")
-    hub_d = 16,                     // hub diameter | Default(16)
-    hub_screw_d = 5.5,              // hub screw diameter | Default(5.5)
-    eh_l = 0,                       // length of the emptying of the hub | Default(0 = [No support])
-    eh_d = 0                        // diameter of the hollowing of the hub | Default(0 = [No support])
+vermicomposter(
+    size = [210, 210, 100],
+    column_d = 6,
+    column_s = 3,  // column separation
+    notch = 60,
+    notch_var = 7
 );
 ```
 
-- `$fn`: defines the number of facets by default. In other words how smoother the propeller will be. If you are just experimenting we recomend you to comment that line.
-- `blades`: just the number of blades you want
-- `height`: total propeller height
-- `blade_length`: blade lenght or total radius. If you have a 5'' drone set this to 63 (mm).
-- `blade_width`: blade width
-- `blade_thickness` blade thickness. Be aware of your printer capabilities.
-- `blade_hole_offset`: displacement between outer and inner sides of the blades. It shouldn't be greater than thickness.
-- `blade_twist`: this sets how is going to be the attack angle. A positive value will generate a CW propeller and a negative one a CCW.
-- `blade_offset`: blade distance from propeller axis
-- `safe_blades_direction`: indicates if a blade must delete itself from getting into (1) the previous or (2) the next blade.
-- `hub_d`: hub or holder diameter.
-- `hub_screw_d`: motor axis screw diameter.
-- `eh_l`: support hole length.
-- `eh_d`: support hole diameter.
+- `size`: An array that defines the total length, width and height of the bin.
+- `column_d`: Columns are the structure part that gives strength to the wall. This parameter defines their diameter.
+- `column_s`: Separation between columns.
+- `notch`: Notch are "holes" in the wall that allowes the air exchange and prevents anaerobic processes. This parameter defines the base height of them.
+- `notch_var`: This defines the notch variation. For example, if it's set to 7 the notch will be at `notch` +/- `notch_var`.
+- `box_radius`: The radius of the box corner.
+- `box_top`: heigth of the top chamfer.
+- `box_top_r`: radius of the top chamfer. I recommend that it be greater than `box_bottom_r`.
+- `box_bottom`: height of the bottom chamfer.
+- `box_bottom_r`: radius of the bottom chamfer. I recommend that it be greater than `box_top_r`.
 
 That's all! Render it with this values with OpenSCAD and you will get something similar to this:
 
-Now it's your turn. Play with the parameters and try adding more blades, different lengths, attack angles, etc. Let's make something awesome!
+Now it's your turn. Play with the parameters and different lengths, widths, columns, etc. Let's make something awesome!
 
 
 ## Contributing
