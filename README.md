@@ -7,7 +7,7 @@
 
 
 
-The Ultimate Vermicomposter Generator is an open source project that provides a way to generate STL files to 3D print a vermicomposter.
+The Ultimate Vermicomposter Generator is an open source project that provides a way to generate STL files to 3D print a vermicomposter. This project was inspired by [@hitchhiker4200](https://www.printables.com/es/@hitchhiker4200) design of a [Vase Mode Vermicomposter Compost Bin System](https://www.printables.com/es/model/242869-vase-mode-vermicomposter-compost-bin-system) that I just transformed to a parametrizable one.
 
 ![vermicomposter](./img/preview.PNG)
 
