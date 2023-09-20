@@ -1,82 +1,99 @@
-eps=1/128;
-$fn=50;
+$fn=100;
 
 vermicomposter();
 
-
 module vermicomposter(
     size = [210, 210, 100],
+    r = 15,
+    con = 5,
+    bottom = [2,2,20],
     column_d = 6,
     column_s = 3,  // column separation
-    notch = 60,
-    notch_var = 7,
-    box_radius = 15,
-    box_top = 6,
-    box_top_r = 13,
-    box_bottom = 6,
-    box_bottom_r = 10
+    holes_mt = 25,
+    holes_var = 12.5
 ){
-    box(size, box_radius, box_bottom_r, box_top_r, box_top, box_bottom);
+    box(size, r, con, bottom);
     
     columnT = column_d + column_s;
-    columnsL = floor((size[0] - 2*box_radius) / columnT);
-    offsetL = column_d/2 + (size[0]-(columnsL*(column_d+column_s) - column_s))/2;
+    columnsL = floor((size[0] - 2*r) / columnT);
+    offsetL = -(columnsL * columnT - columnT)/2;
     
-    column_h = size[2] - box_top - box_bottom;
-    z =(size[2] - column_h)/2;
+    
+    column_h = size[2] - con - bottom[2];
+    z =bottom[2] + con;
     
     for(a = [0 : columnsL - 1]){
-        n = notch + (a%2 ? notch_var : -notch_var);
+        n = a%2 ? holes_mt : holes_mt + holes_var;
         x = offsetL + a * columnT;
         
-        translate([x,0,z])
+        translate([x,-size[1]/2,z])
             column(column_d, column_h, n);
-        translate([x,size[1],z]) 
+        translate([x,size[1]/2,z]) 
             rotate(180) column(column_d, column_h, n);
     }
     
-    columnsW = floor((size[1] - 2*box_radius) / columnT);
-    offsetW = column_d/2 + (size[1]-(columnsW*(column_d+column_s) - column_s))/2;
+    columnsW = floor((size[1] - 2*r) / columnT);
+    offsetW = -(columnsW * columnT - columnT)/2;
+    
     for(a = [0 : columnsW - 1]){
-        n = notch + (a%2 ? notch_var : -notch_var);
-        y =offsetW + a * columnT;
+        n = a%2 ? holes_mt : holes_mt + holes_var;
+        y = offsetW + a * columnT;
         
-        translate([0,y,z]) 
+        translate([-size[0]/2,y,z]) 
             rotate(-90) column(column_d, column_h, n);
-        translate([size[0],y,z]) 
+        translate([size[0]/2,y,z]) 
             rotate(90) column(column_d, column_h, n);
     }
     
 }
 
 module box(
-    size = [200, 100, 50],
-    radius = 15,
-    bottom_r = 6,
-    top_r = 6,
-    top = 6,
-    bottom = 6
-){
-    translate([radius,radius,0]){
-        hull() 
-        for(i = [0 : 1]){
-            for(j = [0 : 1]){
-                translate([i*(size[0]-2*radius),j*(size[1]-2*radius),0]){
-                    translate([0,0,0])cylinder(r1=bottom_r, r2=radius, h=bottom);
-                    translate([0,0,bottom]) cylinder(r=radius,h=size[2]-top-bottom);
-                    translate([0,0,size[2]-top]) cylinder(r1=radius, r2=top_r, h=top);
-                }
-            }
+    size = [210, 210, 100],
+    r = 15,
+    con = 6,
+    bottom = [1,1,20]
+){  
+        translate([0,0,bottom[2]+con]) linear_extrude(size[2]-con-bottom[2]) hull(){
+            x = (size[0] - 2*r)/2;
+            y = (size[1] - 2*r)/2;
+            translate([-x,-y,0]) circle(r=r);
+            translate([-x,y,0]) circle(r=r);
+            translate([x,-y,0]) circle(r=r);
+            translate([x,y,0]) circle(r=r);
         }
-    }
+    
+        b0 = size[0] - bottom[0];
+        b1 = size[1] - bottom[1];
+        
+        translate([0,0,bottom[2]]) linear_extrude(con, scale=[
+            size[0]/b0,
+            size[1]/b1
+        ]) hull() {
+            x = (b0 - 2*r)/2;
+            y = (b1 - 2*r)/2;
+            
+            translate([-x,-y,0]) circle(r=r);
+            translate([-x,y,0]) circle(r=r);
+            translate([x,-y,0]) circle(r=r);
+            translate([x,y,0]) circle(r=r);
+        }
+        
+        
+        linear_extrude(bottom[2]) hull(){
+            x = (b0 - 2*r)/2;
+            y = (b1 - 2*r)/2;
+            translate([-x,-y,0]) circle(r=r);
+            translate([-x,y,0]) circle(r=r);
+            translate([x,-y,0]) circle(r=r);
+            translate([x,y,0]) circle(r=r);
+       
+        }
 }
-
-//!column();
 
 module column(
     d = 10,
     h = 40,
-    notch_h = 20
+    hole_mt = 18
     
 ){
     scale([1,0.8,1]) difference(){
@@ -85,8 +102,9 @@ module column(
             translate([0,0,d]) cylinder(h=h - 2*d, d=d);
             translate([0,0,h-d]) cylinder(r1=d/2, r2=0, h=d);
         }
-        if (notch_h >= d){        
-            translate([d/2,0,notch_h]) rotate([0,-90,0]) linear_extrude(d) polygon(points = [
+        if (hole_mt <= h){        
+            translate([d/2,0,h-hole_mt]) 
+            rotate([0,-90,0]) linear_extrude(d) polygon(points = [
                 [0,0],
                 [0,-d],
                 [sqrt(pow(d,2) - pow(d/2,2)),-d/2]
@@ -94,4 +112,3 @@ module column(
         }
     }
 }
-
