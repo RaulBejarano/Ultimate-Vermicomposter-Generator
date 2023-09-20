@@ -1,7 +1,7 @@
 # Ultimate Vermicomposter Generator
 
 
-![version](https://badgen.net/badge/version/v1.0.0?icon=github)
+![version](https://badgen.net/badge/version/v2.0.0?icon=github)
 ![license](https://badgen.net/github/license/RaulBejarano/Ultimate-Vermicomposter-Generator)
 ![commits](https://badgen.net/github/commits/RaulBejarano/Ultimate-Vermicomposter-Generator/main)
 
@@ -16,7 +16,7 @@ The Ultimate Vermicomposter Generator is an open source project that provides a 
 | ![](./img/size.PNG)  | ![](./img/structure.PNG) | ![](./img/ventilation.PNG) | ![](./img/stackable.PNG)  |
 |---|---|---|---|
 |  Any size  |  Structure  | Ventilation holes | Stackable  |
-|  You can create a vermicomposter that fits wherever you want  |  Wall structure highly customizable to match your requirements  | Prevent anaerobic processes by using ventilation and put it where you want | Configure the top and bottom chamfer to make a big stack |
+|  You can create a vermicomposter that fits wherever you want  |  Wall structure highly customizable to match your requirements  | Prevent anaerobic processes by using ventilation and put it where you want | Configure the bottom chamfer to make a big stack |
 
 
 ## :muscle: Getting started
@@ -41,23 +41,24 @@ This defines a bin:
 ```
 vermicomposter(
     size = [210, 210, 100],
+    r = 15,
+    con = 5,
+    bottom = [2,2,20],
     column_d = 6,
     column_s = 3,  // column separation
-    notch = 60,
-    notch_var = 7
+    holes_mt = 25,
+    holes_var = 12.5
 );
 ```
 
 - `size`: An array that defines the total length, width and height of the bin.
+- `r`: The radius of the box corner.
+- `con`: The connection space between the union chamfer and the main body.
+- `bottom`: Bottom margin that defines the union chamfer.
 - `column_d`: Columns are the structure part that gives strength to the wall. This parameter defines their diameter.
 - `column_s`: Separation between columns.
-- `notch`: Notch are "holes" in the wall that allowes the air exchange and prevents anaerobic processes. This parameter defines the base height of them.
-- `notch_var`: This defines the notch variation. For example, if it's set to 7 the notch will be at `notch` +/- `notch_var`.
-- `box_radius`: The radius of the box corner.
-- `box_top`: heigth of the top chamfer.
-- `box_top_r`: radius of the top chamfer. I recommend that it be greater than `box_bottom_r`.
-- `box_bottom`: height of the bottom chamfer.
-- `box_bottom_r`: radius of the bottom chamfer. I recommend that it be greater than `box_top_r`.
+- `holes_mt`: Top margin of the column holes.
+- `holes_var`: This defines the notch spare.
 
 That's all! Render it with this values with OpenSCAD and you will get something similar to this:
 
