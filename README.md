@@ -1,7 +1,7 @@
 # Ultimate Vermicomposter Generator
 
 
-![version](https://badgen.net/badge/version/v2.0.0?icon=github)
+![version](https://badgen.net/badge/version/v2.0.1?icon=github)
 ![license](https://badgen.net/github/license/RaulBejarano/Ultimate-Vermicomposter-Generator)
 ![commits](https://badgen.net/github/commits/RaulBejarano/Ultimate-Vermicomposter-Generator/main)
 
