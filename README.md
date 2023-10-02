@@ -13,7 +13,7 @@ The Ultimate Vermicomposter Generator is an open source project that provides a 
 
 
 ## :sparkles: Features
-| ![](./img/size.png)  | ![](./img/customization.png) | ![](./img/ventilation.PNG) | ![](./img/stack.PNG)  |
+| ![](./img/size.png)  | ![](./img/customization.png) | ![](./img/ventilation.png) | ![](./img/stack.png)  |
 |---|---|---|---|
 |  Any size  |  Structure  | Ventilation holes | Stackable  |
 |  You can create a vermicomposter that fits wherever you want  |  Wall structure highly customizable to match your requirements  | Prevent anaerobic processes by using ventilation and put it where you want | Configure the bottom chamfer to make a big stack |
