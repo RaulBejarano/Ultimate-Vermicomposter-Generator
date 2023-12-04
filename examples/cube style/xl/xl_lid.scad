@@ -1,6 +1,6 @@
 eps = 1/128;
 
-use <../../vermicomposter.scad>
+use <../../../vermicomposter.scad>
 
 size = [213, 213, 10];
 r = 15;

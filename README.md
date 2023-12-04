@@ -32,7 +32,7 @@ Fist of all you have to download several things:
 
 ### :hammer: Creating our first vermicomposter box
 
-Let's start by opening the file [`./examples/xl/xl_mid.scad`](./examples/xl/xl_mid.scad) with OpenSCAD.
+Let's start by opening the file [`./examples/cube style/xl/xl_mid.scad`](./examples/cube style/xl/xl_mid.scad) with OpenSCAD.
 
 You will see some code but we only are interested in the parameters inside the vermicomposter definition. Let's change some of them:
   

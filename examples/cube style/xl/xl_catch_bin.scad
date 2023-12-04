@@ -1,4 +1,4 @@
-use <../../vermicomposter.scad>
+use <../../../vermicomposter.scad>
 
 
 vermicomposter(
